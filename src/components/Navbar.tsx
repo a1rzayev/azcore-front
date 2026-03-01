@@ -18,7 +18,7 @@ export const Navbar = () => {
   ];
 
   return (
-    <div className="w-full">
+    <div className="sticky top-0 z-50 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-gray-100 dark:border-slate-800">
       <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-1">
         <Link href="/">
           <span className="flex items-center space-x-2 text-2xl font-bold text-primary-600 dark:text-white">

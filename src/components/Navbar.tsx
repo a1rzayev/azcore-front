@@ -11,9 +11,10 @@ import {
 
 export const Navbar = () => {
   const otherNav = [
-    { label: "Support", href: "#support" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Contact", href: "#contact" },
+    { label: "Blog", href: "/blog" },
+    { label: "Support", href: "/#support" },
+    { label: "FAQ", href: "/#faq" },
+    { label: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -34,12 +35,12 @@ export const Navbar = () => {
         <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-2">
           <ThemeChanger />
           <div className="hidden mr-3 lg:flex nav__item">
-            <a
-              href="#contact"
+            <Link
+              href="/#contact"
               className="px-6 py-2 text-white bg-primary-600 rounded-md md:ml-5 hover:bg-primary-700 transition-colors"
             >
               Get in Touch
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -87,20 +88,20 @@ export const Navbar = () => {
                   ))}
                 </div>
                 {otherNav.map((item) => (
-                  <a
+                  <Link
                     key={item.href}
                     href={item.href}
                     className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-primary-500 focus:text-primary-500 focus:bg-primary-100 dark:focus:bg-gray-800 focus:outline-none"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
-                <a
-                  href="#contact"
+                <Link
+                  href="/#contact"
                   className="w-full px-6 py-2 mt-3 text-center text-white bg-primary-600 rounded-md lg:ml-5"
                 >
                   Get in Touch
-                </a>
+                </Link>
               </Disclosure.Panel>
             </>
           )}
@@ -133,12 +134,12 @@ export const Navbar = () => {
             </li>
             {otherNav.map((menu) => (
               <li className="mr-3 nav__item" key={menu.href}>
-                <a
+                <Link
                   href={menu.href}
                   className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-primary-500 focus:text-primary-500 focus:bg-primary-100 focus:outline-none dark:focus:bg-gray-800"
                 >
                   {menu.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

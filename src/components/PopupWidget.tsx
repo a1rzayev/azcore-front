@@ -22,7 +22,11 @@ export function PopupWidget() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [Message, setMessage] = useState("");
 
-  const userName = useWatch({ control, name: "name", defaultValue: "Someone" });
+  const userName = useWatch({
+    control,
+    name: "name",
+    defaultValue: "Someone",
+  });
 
   const onSubmit = async (data: any, e: any) => {
     console.log(data);
@@ -58,7 +62,7 @@ export function PopupWidget() {
       <Disclosure>
         {({ open }) => (
           <>
-            <DisclosureButton className="fixed z-40 flex items-center justify-center transition duration-300 bg-indigo-500 rounded-full shadow-lg right-5 bottom-5 w-14 h-14 focus:outline-none hover:bg-indigo-600 focus:bg-indigo-600 ease">
+            <DisclosureButton className="fixed z-40 flex items-center justify-center transition duration-300 bg-primary-500 rounded-full shadow-lg right-5 bottom-5 w-14 h-14 focus:outline-none hover:bg-primary-600 focus:bg-primary-600 ease">
               <span className="sr-only">Open Contact form Widget</span>
               <Transition
                 show={!open}
@@ -110,21 +114,21 @@ export function PopupWidget() {
               </Transition>
             </DisclosureButton>
             <Transition
-              className="fixed  z-50 bottom-[100px] top-0 right-0  left-0 sm:top-auto sm:right-5 sm:left-auto"
+              className="fixed z-50 bottom-[100px] top-0 right-0 left-0 sm:top-auto sm:right-5 sm:left-auto"
               enter="transition duration-200 transform ease"
               enterFrom="opacity-0 translate-y-5"
               leave="transition duration-200 transform ease"
               leaveTo="opacity-0 translate-y-5"
               as="div"
             >
-              <DisclosurePanel className=" flex flex-col  overflow-hidden left-0 h-full w-full sm:w-[350px] min-h-[250px] sm:h-[600px] border border-gray-300 dark:border-gray-800 bg-white shadow-2xl rounded-md sm:max-h-[calc(100vh-120px)]">
-                <div className="flex flex-col items-center justify-center h-32 p-5 bg-indigo-600">
+              <DisclosurePanel className="flex flex-col overflow-hidden left-0 h-full w-full sm:w-[350px] min-h-[250px] sm:h-[600px] border border-gray-300 dark:border-gray-800 bg-white shadow-2xl rounded-md sm:max-h-[calc(100vh-120px)]">
+                <div className="flex flex-col items-center justify-center h-32 p-5 bg-primary-600">
                   <h3 className="text-lg text-white">How can we help?</h3>
                   <p className="text-white opacity-50">
-                    We usually respond in a few hours
+                    We usually respond within a few hours
                   </p>
                 </div>
-                <div className="flex-grow h-full p-6 overflow-auto bg-gray-50 ">
+                <div className="flex-grow h-full p-6 overflow-auto bg-gray-50">
                   {!isSubmitSuccessful && (
                     <form onSubmit={handleSubmit(onSubmit)} noValidate>
                       <input
@@ -134,12 +138,12 @@ export function PopupWidget() {
                       />
                       <input
                         type="hidden"
-                        value={`${userName} sent a message from Nextly`}
+                        value={`${userName} sent a message from AzCore`}
                         {...register("subject")}
                       />
                       <input
                         type="hidden"
-                        value="Nextly Template"
+                        value="AzCore OutSource"
                         {...register("from_name")}
                       />
                       <input
@@ -159,15 +163,15 @@ export function PopupWidget() {
                         <input
                           type="text"
                           id="full_name"
-                          placeholder="John Doe"
+                          placeholder="Your name"
                           {...register("name", {
                             required: "Full name is required",
                             maxLength: 80,
                           })}
-                          className={`w-full px-3 py-2 text-gray-600 placeholder-gray-300 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring   ${
+                          className={`w-full px-3 py-2 text-gray-600 placeholder-gray-300 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring ${
                             errors.name
                               ? "border-red-600 focus:border-red-600 ring-red-100"
-                              : "border-gray-300 focus:border-indigo-600 ring-indigo-100"
+                              : "border-gray-300 focus:border-primary-600 ring-primary-100"
                           }`}
                         />
                         {errors.name && (
@@ -195,13 +199,12 @@ export function PopupWidget() {
                             },
                           })}
                           placeholder="you@company.com"
-                          className={`w-full px-3 py-2 text-gray-600 placeholder-gray-300 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring   ${
+                          className={`w-full px-3 py-2 text-gray-600 placeholder-gray-300 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring ${
                             errors.email
                               ? "border-red-600 focus:border-red-600 ring-red-100"
-                              : "border-gray-300 focus:border-indigo-600 ring-indigo-100"
+                              : "border-gray-300 focus:border-primary-600 ring-primary-100"
                           }`}
                         />
-
                         {errors.email && (
                           <div className="mt-1 text-sm text-red-400 invalid-feedback">
                             {errors.email.message as string}
@@ -216,18 +219,17 @@ export function PopupWidget() {
                         >
                           Your Message
                         </label>
-
                         <textarea
                           rows={4}
                           id="message"
                           {...register("message", {
                             required: "Enter your Message",
                           })}
-                          placeholder="Your Message"
-                          className={`w-full px-3 py-2 text-gray-600 placeholder-gray-300 bg-white border border-gray-300 rounded-md h-28 focus:outline-none focus:ring   ${
+                          placeholder="Tell us about your project..."
+                          className={`w-full px-3 py-2 text-gray-600 placeholder-gray-300 bg-white border border-gray-300 rounded-md h-28 focus:outline-none focus:ring ${
                             errors.message
                               ? "border-red-600 focus:border-red-600 ring-red-100"
-                              : "border-gray-300 focus:border-indigo-600 ring-indigo-100"
+                              : "border-gray-300 focus:border-primary-600 ring-primary-100"
                           }`}
                           required
                         ></textarea>
@@ -240,7 +242,7 @@ export function PopupWidget() {
                       <div className="mb-3">
                         <button
                           type="submit"
-                          className="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none"
+                          className="w-full px-3 py-4 text-white bg-primary-500 rounded-md focus:bg-primary-600 focus:outline-none"
                         >
                           {isSubmitting ? (
                             <svg
@@ -268,22 +270,6 @@ export function PopupWidget() {
                           )}
                         </button>
                       </div>
-                      <p
-                        className="text-xs text-center text-gray-400"
-                        id="result"
-                      >
-                        <span>
-                          Powered by{" "}
-                          <a
-                            href="https://Web3Forms.com"
-                            className="text-gray-600"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Web3Forms
-                          </a>
-                        </span>
-                      </p>
                     </form>
                   )}
 
@@ -308,7 +294,7 @@ export function PopupWidget() {
                       </h3>
                       <p className="text-gray-700 md:px-3">{Message}</p>
                       <button
-                        className="mt-6 text-indigo-600 focus:outline-none"
+                        className="mt-6 text-primary-600 focus:outline-none"
                         onClick={() => reset()}
                       >
                         Go back
@@ -332,13 +318,12 @@ export function PopupWidget() {
                           strokeWidth="3"
                         />
                       </svg>
-
                       <h3 className="text-xl text-red-400 py-7">
                         Oops, Something went wrong!
                       </h3>
                       <p className="text-gray-700 md:px-3">{Message}</p>
                       <button
-                        className="mt-6 text-indigo-600 focus:outline-none"
+                        className="mt-6 text-primary-600 focus:outline-none"
                         onClick={() => reset()}
                       >
                         Go back

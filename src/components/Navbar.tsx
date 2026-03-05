@@ -11,6 +11,7 @@ import {
 
 export const Navbar = () => {
   const otherNav = [
+    { label: "Portfolio", href: "/portfolio" },
     { label: "Blog", href: "/blog" },
     { label: "Support", href: "/#support" },
     { label: "FAQ", href: "/#faq" },

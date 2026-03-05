@@ -1,0 +1,4 @@
+{"sessionId":"987f9d","location":"api/auth/login/route.ts:41","message":"Cookie set attempted, returning success","data":{"tokenLength":157},"hypothesisId":"H-B","timestamp":1772698106416}
+{"sessionId":"987f9d","location":"api/auth/login/route.ts:47","message":"Response set-cookie header check","data":{"setCookieHeader":null},"hypothesisId":"H-B","timestamp":1772698106417}
+{"sessionId":"987f9d","location":"admin/login/page.tsx:26","message":"API response received","data":{"status":200,"ok":true,"data":{"success":true}},"hypothesisId":"H-A","timestamp":1772698106420}
+{"sessionId":"987f9d","location":"admin/login/page.tsx:33","message":"About to call router.replace(/admin)","data":{},"hypothesisId":"H-C","timestamp":1772698106424}

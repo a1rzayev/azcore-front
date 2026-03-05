@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import {
-  verifyPassword,
-  createToken,
-  setAuthCookie,
-} from "@/lib/auth";
+import { verifyPassword, createToken } from "@/lib/auth";
+
+const COOKIE_NAME = "azcore_admin_token";
 
 export async function POST(request: NextRequest) {
   try {
@@ -38,24 +36,18 @@ export async function POST(request: NextRequest) {
     }
 
     const token = await createToken({ sub: admin.id });
-    await setAuthCookie(token);
-
-    // #region agent log
-    fetch('http://127.0.0.1:7931/ingest/af8e5731-0c54-455b-b3c7-a6a0ba6afaa0',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'987f9d'},body:JSON.stringify({sessionId:'987f9d',location:'api/auth/login/route.ts:41',message:'Cookie set attempted, returning success',data:{tokenLength:token.length},hypothesisId:'H-B',timestamp:Date.now()})}).catch(()=>{});
-    // #endregion
 
     const response = NextResponse.json({ success: true });
-
-    // #region agent log
-    const setCookieHeader = response.headers.get('set-cookie');
-    fetch('http://127.0.0.1:7931/ingest/af8e5731-0c54-455b-b3c7-a6a0ba6afaa0',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'987f9d'},body:JSON.stringify({sessionId:'987f9d',location:'api/auth/login/route.ts:47',message:'Response set-cookie header check',data:{setCookieHeader},hypothesisId:'H-B',timestamp:Date.now()})}).catch(()=>{});
-    // #endregion
+    response.cookies.set(COOKIE_NAME, token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24, // 24 hours
+      path: "/",
+    });
 
     return response;
   } catch (error) {
-    // #region agent log
-    fetch('http://127.0.0.1:7931/ingest/af8e5731-0c54-455b-b3c7-a6a0ba6afaa0',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'987f9d'},body:JSON.stringify({sessionId:'987f9d',location:'api/auth/login/route.ts:53',message:'Login API threw exception',data:{error:String(error)},hypothesisId:'H-D',timestamp:Date.now()})}).catch(()=>{});
-    // #endregion
     console.error("Login error:", error);
     return NextResponse.json(
       { error: "An error occurred" },

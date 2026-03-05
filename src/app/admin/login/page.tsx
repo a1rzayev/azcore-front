@@ -25,21 +25,12 @@ export default function AdminLoginPage() {
 
       const data = await res.json();
 
-      // #region agent log
-      fetch('http://127.0.0.1:7931/ingest/af8e5731-0c54-455b-b3c7-a6a0ba6afaa0',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'987f9d'},body:JSON.stringify({sessionId:'987f9d',location:'admin/login/page.tsx:26',message:'API response received',data:{status:res.status,ok:res.ok,data},hypothesisId:'H-A',timestamp:Date.now()})}).catch(()=>{});
-      // #endregion
-
       if (!res.ok) {
         setError(data.error || "Login failed");
         return;
       }
 
-      // #region agent log
-      fetch('http://127.0.0.1:7931/ingest/af8e5731-0c54-455b-b3c7-a6a0ba6afaa0',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'987f9d'},body:JSON.stringify({sessionId:'987f9d',location:'admin/login/page.tsx:33',message:'About to call router.replace(/admin)',data:{},hypothesisId:'H-C',timestamp:Date.now()})}).catch(()=>{});
-      // #endregion
-
       router.replace("/admin");
-      router.refresh();
     } catch {
       setError("Something went wrong");
     } finally {
@@ -48,14 +39,14 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50 dark:bg-slate-900">
       <div className="w-full max-w-md">
         <div className="p-8 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-100 dark:border-slate-700">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
             Admin Login
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mb-6">
-            Sign in to manage your portfolio
+            Sign in to manage your portfolio and posts
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
